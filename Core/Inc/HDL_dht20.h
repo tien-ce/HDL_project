@@ -8,7 +8,7 @@
 #ifndef INC_HDL_DHT20_H_
 #define INC_HDL_DHT20_H_
 #include "i2c-lcd.h"
-#include "global.h"
+
 #include "dht20.h"
 #include "main.h"
 #include "stdio.h"

@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "HDL_dht20.h"
+#include <math.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -130,6 +131,7 @@ int main(void)
 	 }
 	 */
 	 HDL_DHT20_run();
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

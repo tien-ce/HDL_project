@@ -6,6 +6,10 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Core/Src/HDl_dht20.c \
+../Core/Src/dht20.c \
+../Core/Src/i2c-lcd.c \
+../Core/Src/i2c_master.c \
+../Core/Src/i2c_slave.c \
 ../Core/Src/main.c \
 ../Core/Src/stm32f1xx_hal_msp.c \
 ../Core/Src/stm32f1xx_it.c \
@@ -15,6 +19,10 @@ C_SRCS += \
 
 OBJS += \
 ./Core/Src/HDl_dht20.o \
+./Core/Src/dht20.o \
+./Core/Src/i2c-lcd.o \
+./Core/Src/i2c_master.o \
+./Core/Src/i2c_slave.o \
 ./Core/Src/main.o \
 ./Core/Src/stm32f1xx_hal_msp.o \
 ./Core/Src/stm32f1xx_it.o \
@@ -24,6 +32,10 @@ OBJS += \
 
 C_DEPS += \
 ./Core/Src/HDl_dht20.d \
+./Core/Src/dht20.d \
+./Core/Src/i2c-lcd.d \
+./Core/Src/i2c_master.d \
+./Core/Src/i2c_slave.d \
 ./Core/Src/main.d \
 ./Core/Src/stm32f1xx_hal_msp.d \
 ./Core/Src/stm32f1xx_it.d \

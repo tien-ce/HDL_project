@@ -29,16 +29,4 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>SOW</name>
-			<type>2</type>
-			<location>E:/SOW</location>
-		</link>
-		<link>
-			<name>commucation</name>
-			<type>2</type>
-			<location>E:/commucation</location>
-		</link>
-	</linkedResources>
 </projectDescription>
