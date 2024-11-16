@@ -6,18 +6,11 @@
  */
 #include "HDL_dht20.h"
  I2C_HandleTypeDef hi2c1;
-typedef enum{
-	INIT_DHT20,
-	CHECK_CONNECTION,
-	CHECK_READY,
-    REQUEST_DATA,
-    READ_DATA,
-    CONVERT_DATA,
-	DONE
-} DHT20_state;
-DHT20_state state;
-DHT20_t dht20;
-status_active active ;
+
+
+ DHT20_state state;         // Định nghĩa biến trạng thái
+ status_active active;      // Định nghĩa biến trạng thái hoạt động
+ DHT20_t dht20;             // Định nghĩa cấu trúc DHT20
 void HDL_DHT20_init(){
 	state = INIT_DHT20;
 	active = DHT20_OK;
@@ -26,16 +19,18 @@ void HDL_DHT20_init(){
 void HDL_DHT20_run(){
 	switch(state){
 	case INIT_DHT20:
-		DHT20_Init(&dht20, &hi2c1);
+		 DHT20_Init(&dht20, &hi2c1);
 	 	 HAL_Delay(100);
 		 state = CHECK_CONNECTION;
 	 	 break;
 	case CHECK_CONNECTION:
 		if(DHT20_IsConnected(&dht20) ){
+			active = DHT20_OK;
 			state = CHECK_READY;
 		}
 		else{
 			active = DHT20_ERROR_CONNECT;
+			state = ERROR_STATE;
 		}
 		break;
 	case CHECK_READY:
@@ -107,6 +102,19 @@ void HDL_DHT20_run(){
 		state = CHECK_READY;
 		break;
 	}
+	case ERROR_STATE:
+			if(active == DHT20_ERROR_CONNECT){
+	/*
+	 * 		do{
+				  HAL_Delay(100);
+			  }while(!DHT20_IsConnected(&dht20));
+			  active = DHT20_OK;
+			 */
+			  state = INIT_DHT20;
+		  }
+		else{
+		  }
+	    break;
 	default :
 		break;
 	}

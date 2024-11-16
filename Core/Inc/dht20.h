@@ -18,7 +18,7 @@ typedef enum {
     DHT20_ERROR_LASTREAD         // Lỗi liên quan đến lần đọc cuối cùng từ cảm biến.
 } status_active;
 
-	typedef struct {
+typedef struct {
 		I2C_HandleTypeDef *hi2c;  // Giao tiếp I2C được sử dụng
 		float humidity; // Độ ẩm
 		float temperature; // Nhiệt độ
@@ -30,17 +30,12 @@ typedef enum {
 		uint8_t bytes[7];// Mảng nhận dữ liệu
 	} DHT20_t;
 
+extern DHT20_t dht20;
+extern status_active active ;
 	// Hàm khởi tạo cảm biến DHT20 với giao tiếp I2C
 	void DHT20_Init(DHT20_t *dht20, I2C_HandleTypeDef *hi2c);
-
-	// Hàm bắt đầu giao tiếp với cảm biến DHT20. Trả về 0 nếu thành công hoặc mã lỗi nếu không.
-	uint8_t DHT20_Begin(DHT20_t *dht20);
-
 	// Kiểm tra xem cảm biến DHT20 có được kết nối hay không. Trả về true nếu có kết nối, false nếu không.
 	uint8_t DHT20_IsConnected(DHT20_t *dht20);
-
-	// Trả về địa chỉ I2C của cảm biến DHT20.
-	uint8_t DHT20_GetAddress();
 
 	// Gửi yêu cầu thu thập dữ liệu từ cảm biến. Trả về 0 nếu thành công hoặc mã lỗi nếu không.
 	status_active DHT20_RequestData(DHT20_t *dht20);
@@ -54,23 +49,11 @@ typedef enum {
 	// Gọi hàm để đọc và chuyển đổi dữ liệu từ cảm biến. Trả về 0 nếu thành công hoặc mã lỗi nếu không.
 	status_active DHT20_Read(DHT20_t *dht20);
 
-	// Trả về giá trị độ ẩm hiện tại đo được từ cảm biến (đã chuyển đổi từ dữ liệu thô).
-	float DHT20_GetHumidity(DHT20_t *dht20);
-
-	// Trả về giá trị nhiệt độ hiện tại đo được từ cảm biến (đã chuyển đổi từ dữ liệu thô).
-	float DHT20_GetTemperature(DHT20_t *dht20);
-
 	// Đặt giá trị bù độ ẩm cho cảm biến (offset). Giá trị này sẽ được cộng thêm vào khi tính toán độ ẩm.
 	void DHT20_SetHumOffset(DHT20_t *dht20, float offset);
 
 	// Đặt giá trị bù nhiệt độ cho cảm biến (offset). Giá trị này sẽ được cộng thêm vào khi tính toán nhiệt độ.
 	void DHT20_SetTempOffset(DHT20_t *dht20, float offset);
-
-	// Trả về giá trị bù độ ẩm hiện tại của cảm biến.
-	float DHT20_GetHumOffset(DHT20_t *dht20);
-
-	// Trả về giá trị bù nhiệt độ hiện tại của cảm biến.
-	float DHT20_GetTempOffset(DHT20_t *dht20);
 
 	// Hàm đọc trạng thái hiện tại của cảm biến DHT20. Trả về mã trạng thái hoặc mã lỗi nếu có.
 	uint8_t DHT20_ReadStatus(DHT20_t *dht20);

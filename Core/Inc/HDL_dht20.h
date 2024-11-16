@@ -12,6 +12,17 @@
 #include "dht20.h"
 #include "main.h"
 #include "stdio.h"
+typedef enum{
+	INIT_DHT20,
+	CHECK_CONNECTION,
+	CHECK_READY,
+    REQUEST_DATA,
+    READ_DATA,
+    CONVERT_DATA,
+	DONE,
+	ERROR_STATE
+} DHT20_state;
+extern DHT20_state state;
 void float_to_str(float num, char *str, int decimal);
 void HDL_DHT20_init();
 void HDL_DHT20_run();

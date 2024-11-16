@@ -20,9 +20,7 @@ void DHT20_Init(DHT20_t *dht20, I2C_HandleTypeDef *hi2c) {
     dht20->lastRead = 0;
 }
 
-uint8_t DHT20_Begin(DHT20_t *dht20) {
-    return DHT20_IsConnected(dht20);
-}
+
 
 uint8_t DHT20_IsConnected(DHT20_t *dht20) {
     uint8_t dummy = 0;
@@ -60,6 +58,7 @@ uint8_t DHT20_ReadData(DHT20_t *dht20) {
     dht20->lastRead = HAL_GetTick();
     return DHT20_OK;
 }
+
 
 uint8_t DHT20_Convert(DHT20_t *dht20) {
     dht20->status = dht20->bytes[0];
@@ -99,14 +98,6 @@ uint8_t DHT20_Read(DHT20_t *dht20) {
     if (status < 0) return status;
 
     return DHT20_Convert(dht20);
-}
-
-float DHT20_GetHumidity(DHT20_t *dht20) {
-    return dht20->humidity + dht20->humOffset;
-}
-
-float DHT20_GetTemperature(DHT20_t *dht20) {
-    return dht20->temperature + dht20->tempOffset;
 }
 
 uint8_t DHT20_ReadStatus(DHT20_t *dht20) {
@@ -149,7 +140,6 @@ if ((DHT20_ReadStatus(dht20) & 0x18) != 0x18) {
     if (DHT20_ResetRegister(dht20, 0x1E)) count++;
     HAL_Delay(10);
 }
-
 return count;
 }
 
